@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Guess Number</title>
+    <style>
+        body{
+            margin: 100px 10px;
+            background-image: url(Images/nice.jpg);
+            background-repeat: no-repeat;
+            background-position: center;
+            background-size: cover;
+        }
+        .all{
+            background-image: url(Images/new.jpg);
+            background-repeat: no-repeat;
+            background-position: center;
+            background-size: cover;
+            max-width: 30%;
+            height: 32em;
+            align-items: center;
+            justify-content: center;
+            margin: auto;
+            border: 15px solid rgb(75, 70, 70);
+            border-radius: 15px;
+        }
+.container{
+    display: flex;
+    align-items: center;
+    
+}
+.left-line,
+.right-line{
+    width: 50%;
+    border-top: 3px solid rgba(239, 80, 1, 0.493);
+}
+.number-box{
+    border: 3px solid rgb(173, 95, 16);
+    padding: 0 20px;
+    font-size: 30px;
+    font-weight:bold ;
+    color: rgb(255, 255, 255);
+}
+.heading{
+    text-align: center;
+    color: rgb(255, 149, 0);
+}
+.number{
+    width: 120px;
+    height: 30px;
+    border: none;
+    border-radius: 5px;
+    margin-left: 30px;
+    text-align: center;
+    font-size: 1em;
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: bold;
+    background-color: rgb(255, 255, 255);
+
+}
+.num{
+    margin-top:50px ;
+    display: flex;
+    justify-content: space-between;
+
+}
+   
+   
+
+.button1{
+    margin:  0 30px;
+    border: none;
+    height: 30px;
+    width: 60px;
+    border-radius: 5px ;
+    background-color: rgb(0, 170, 255);
+    color: white;
+    font-family:Arial, Helvetica, sans-serif;
+    font-weight: bold;
+
+}
+.result{
+    margin-right: 30px;
+}
+.p1,
+.p2,
+.p3{
+    font-size: 1em;
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: bold;
+    color: white;
+    font-style: italic;
+}
+    .para{
+        margin: 0 50px;
+    }
+    @media (max-width: 768px) {
+    .all {
+        max-width: 90%;
+    }
+    .number {
+        width: 100px; /* Adjusted width for better mobile experience */
+        margin-left: 10px; /* Adjusted margin */
+    }
+    .para {
+        margin: 0 20px; /* Adjusted margin */
+    }
+}
+.try{
+    align-items: center;
+    justify-content: center;
+    margin: 0px 200px ;
+    padding-top: 40px;
+}
+.beast{
+    color: white;
+   margin-left: 15px;
+    
+}
+.tryagain{
+   
+    background-color: rgb(47, 76, 156);
+    color: wheat;
+    border: none;
+    height: 40px;
+    width: 90px;
+    border-radius: 6px;
+    font-weight: bold;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+
+}
+.h3{
+    color: rgb(219, 214, 214);
+    text-align: center;
+
+
+    
+}
+    </style>
+</head>
+<body>
+
+   <div class="all">
+    <h1 class="heading">Guess My Number!</h1>
+    <h3 class="h3">Numbers between 1 - 20</h3>
+
+    <div class="container">
+        <div class="left-line"></div>
+        <div class="number-box">?</div>
+        <div class="right-line"></div>
+    </div>
+
+    <div class="num">
+        <input  class="number" type="number" name="" id="number" value=""> <br>
+       
+        <div class="result">
+            <p class="p1">Start Guessing......</p>
+            
+        </div>
+
+    </div>
+    <button class="button1">Check!</button>
+<div class="para">
+    <p class="p2">Score : 20</p>
+    <p class="p3">High Score : 0</p>
+</div>
+  <div class="try">
+    <button class="tryagain">Try Again</button>
+    <P class="beast"> Mr.Beast</P>
+  </div>
+
+</div>
+
+   </div>
+<script>
+    'use strict';
+let secretNum = Math.floor(Math.random() * 20 ) + 1 ;
+let score = 20;
+let highScore;
+document.querySelector('.number-box').textContent ;
+
+document.querySelector('.button1').addEventListener(
+    'click', function (){
+        const guess = Number(document.querySelector('.number').value);
+        if(!guess){
+            document.querySelector('.p1').textContent = "No Number";
+        
+        }else if (guess === secretNum){
+            document.querySelector('.p1').textContent = " Correct Number";
+            document.querySelector('.number-box').textContent = secretNum;
+            
+            
+            document.querySelector('.p3') . textContent =  "High Score : "  + score
+            document.querySelector('body').style.backgroundImage = '#60b347';
+
+        
+        }else if (guess > secretNum){
+            if (score > 0){
+
+            document.querySelector('.p1').textContent = "Too High";
+           
+           document.querySelector('.p2').textContent = "Score : " +  --score;
+           score--;
+            }else{
+                document.querySelector('.p1').textContent = "You lost the game";
+            }
+        } else if (guess < secretNum){
+            document.querySelector('.p1').textContent = "Too Low";
+            document.querySelector('.p2').textContent = "Score : " +  --score;
+           score--;
+
+        } 
+
+    });
+    document.querySelector('.tryagain').addEventListener(
+    'click', function(){
+        score = 20;
+       secretNum = Math.floor(Math.random() * 20 ) + 1 ;
+        document.querySelector('.p1').textContent = "Start Guessing......";
+        document.querySelector('.p2').textContent ="Score : " + score;
+        document.querySelector('.number-box'). textContent = "?";
+        document.querySelector('.number').value = '';
+        document.querySelector('.p3').textContent = "High Score : " + 0;
+        document.querySelector('body').style.backgroundImage = '#222';
+
+    }
+)
+
+    
+
+</script>
+
+</body>
+</html>
